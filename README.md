@@ -1,0 +1,3 @@
+tinyicon by GK Labs is a free, browser based tool for turning PNG, JPEG, or WebP images into favicons and a complete icon pack. Images are processed on the device and aren’t uploaded or stored.
+
+You can preview your image, choose which ICO sizes to include (16–256 px), and decide whether to keep transparency. The app also creates PNG icons for phones and apps, bundles them with a web manifest in a ZIP, and provides HTML code to add the icons to a site. For non-square images, it uses a centered square crop and warns when the source may look soft at larger sizes.

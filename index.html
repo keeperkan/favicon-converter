@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' blob: data:; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'"
+    />
+    <meta name="theme-color" content="#f6f5f1" />
+    <meta name="description" content="Turn a PNG, JPEG, or WebP into a crisp favicon and icon pack in seconds. We never store your images — everything is generated on your device." />
+    <title>tinyicon by GK Labs — Make it icon-size</title>
+    <link rel="preload" href="fonts/dm-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="favicon.ico" sizes="any" />
+  </head>
+  <body>
+    <div class="privacy-banner" role="note">
+      <svg class="privacy-banner-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <rect x="5" y="10.5" width="14" height="10" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.8" />
+        <path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+      </svg>
+      <p><strong>We don’t store your images.</strong> Your favicons are generated right here, on your device — nothing is ever uploaded.</p>
+    </div>
+
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="tinyicon by GK Labs, home">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+          <span>tiny<span class="brand-light">icon</span></span>
+        </a>
+        <div class="top-note"><span class="status-dot" aria-hidden="true"></span> Free, private, in your browser</div>
+      </header>
+
+      <main>
+        <section class="intro">
+          <div class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span> THE LAST PIXEL OF YOUR BRAND</div>
+          <h1>Make it <span>icon-size.</span></h1>
+          <p class="subtitle">Turn any image into a favicon that looks right everywhere.<br class="desktop-break" /> No uploads, no storage, no fuss. Just a tiny bit of magic.</p>
+        </section>
+
+        <section class="workspace" aria-label="Favicon converter">
+          <div class="tool-column">
+            <input id="file-input" class="visually-hidden" type="file" accept="image/png,image/jpeg,image/webp,.png,.jpg,.jpeg,.webp" tabindex="-1" aria-hidden="true" />
+            <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-describedby="file-types">
+              <div class="upload-art" aria-hidden="true">
+                <div class="upload-back"></div>
+                <div class="upload-front">
+                  <svg viewBox="0 0 24 24" fill="none" focusable="false"><path d="M12 16V5m0 0L7.5 9.5M12 5l4.5 4.5M5 15v3.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V15" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                </div>
+                <span class="spark spark-one">✳</span><span class="spark spark-two">✦</span>
+              </div>
+              <div class="drop-copy">
+                <strong>Drop your image here</strong>
+                <span>or <span class="text-link">browse files</span> to get started</span>
+              </div>
+              <div id="file-types" class="file-types">
+                <span>PNG</span><i aria-hidden="true"></i><span>JPG</span><i aria-hidden="true"></i><span>WEBP</span><i aria-hidden="true"></i><span>UP TO 10 MB</span>
+              </div>
+            </div>
+
+            <div class="settings-card">
+              <div class="card-heading">
+                <div><span class="step-number" aria-hidden="true">01</span><h2>Your settings</h2></div>
+                <span id="settings-badge" class="auto-badge"><span aria-hidden="true"></span> ADD AN IMAGE</span>
+              </div>
+
+              <div class="setting-row">
+                <div><span class="setting-label">Output</span><p>.ICO plus a full PNG icon pack</p></div>
+                <div class="format-pill"><span class="format-icon" aria-hidden="true">▣</span> ICO + PNG</div>
+              </div>
+
+              <div class="setting-row size-row">
+                <div><span id="sizes-label" class="setting-label">ICO sizes</span><p id="sizes-hint">16, 32 &amp; 48 cover every browser</p></div>
+                <div id="size-tags" class="size-tags" role="group" aria-labelledby="sizes-label" aria-describedby="sizes-hint"></div>
+              </div>
+
+              <div class="setting-row">
+                <div><span id="transparency-label" class="setting-label">Keep transparency</span><p>Off fills the background with white</p></div>
+                <button id="transparency-toggle" class="toggle is-on" type="button" role="switch" aria-checked="true" aria-labelledby="transparency-label"><span></span></button>
+              </div>
+
+              <button id="convert-button" class="convert-button" type="button" disabled>
+                <span class="convert-label">Make my favicon</span><span class="button-arrow" aria-hidden="true">↗</span>
+              </button>
+              <p class="privacy-note"><span aria-hidden="true">⌑</span> Your image never leaves this device and is never stored.</p>
+            </div>
+          </div>
+
+          <aside class="preview-card" aria-label="Live preview">
+            <div class="preview-header">
+              <div><span class="step-number" aria-hidden="true">02</span><h2>Live preview</h2></div>
+              <span id="preview-state" class="preview-state">WAITING FOR IMAGE</span>
+            </div>
+
+            <div id="preview-stage" class="preview-stage" aria-hidden="true">
+              <div class="preview-orbit orbit-one"></div>
+              <div class="preview-orbit orbit-two"></div>
+              <div class="browser-card">
+                <div class="browser-top"><span></span><span></span><span></span><div class="address-bar"></div></div>
+                <div class="browser-tab">
+                  <div id="tab-icon" class="mini-favicon"><span>✳</span></div>
+                  <div id="tab-title" class="tab-title">yourwebsite.com</div>
+                  <div class="tab-close">×</div>
+                </div>
+                <div class="browser-page"><div class="page-glint"></div><div class="page-lines"><span></span><span></span><span></span></div></div>
+              </div>
+              <div id="preview-main" class="preview-main checker"><span>✳</span></div>
+              <span class="preview-label label-small">16<span>PX</span></span>
+              <span class="preview-label label-large">48<span>PX</span></span>
+            </div>
+
+            <div class="preview-caption">
+              <span class="caption-icon" aria-hidden="true">◉</span>
+              <span id="preview-caption">Your icon will show up here</span>
+              <span id="caption-check" class="caption-check" aria-hidden="true">✓</span>
+            </div>
+
+            <div class="preview-divider"></div>
+
+            <div class="download-area">
+              <div class="download-copy">
+                <div class="download-icon" aria-hidden="true">↓</div>
+                <div><strong>Ready for the real world?</strong><span>Your favicon, all wrapped up.</span></div>
+              </div>
+              <div class="download-buttons">
+                <button id="download-ico" class="download-button primary" type="button" disabled><span>Download .ICO</span><span aria-hidden="true">↓</span></button>
+                <button id="download-pack" class="download-button" type="button" disabled><span>Full pack .ZIP</span><span aria-hidden="true">↓</span></button>
+              </div>
+            </div>
+
+            <div id="status-message" class="status-message" role="status" aria-live="polite"></div>
+
+            <details id="snippet" class="snippet" hidden>
+              <summary>Add it to your site</summary>
+              <p>Put the pack’s files in your site’s root folder, then paste this inside <code>&lt;head&gt;</code>:</p>
+              <pre><code id="snippet-code"></code></pre>
+              <button id="copy-snippet" class="copy-button" type="button">Copy code</button>
+            </details>
+          </aside>
+        </section>
+
+        <section class="trust-row" aria-label="Why tinyicon">
+          <div><span class="trust-icon" aria-hidden="true">✳</span><span><strong>Pixel perfect</strong><small>Sharp, step-by-step resizing</small></span></div>
+          <div><span class="trust-icon" aria-hidden="true">⌑</span><span><strong>Nothing stored</strong><small>Made on your device, never uploaded</small></span></div>
+          <div><span class="trust-icon" aria-hidden="true">↗</span><span><strong>Ready in a click</strong><small>Works on every browser</small></span></div>
+        </section>
+      </main>
+
+      <footer>
+        <span>MADE FOR THE LITTLE DETAILS</span>
+        <span>© 2026 · <a href="https://gklabs.dev" rel="noopener">GK LABS</a></span>
+      </footer>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
